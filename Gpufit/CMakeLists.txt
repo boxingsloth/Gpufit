@@ -273,5 +273,7 @@ endif()
 
 add_subdirectory( matlab )
 add_subdirectory( python )
-add_subdirectory( java )
+		
+# disable java binding
+#add_subdirectory( java )
 
