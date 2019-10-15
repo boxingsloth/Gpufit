@@ -1,6 +1,6 @@
 function [parameters, states, chi_squares, n_iterations, time]...
     = gpufit_constraints(data, constraints, model_id, initial_parameters, tolerance, max_n_iterations, parameters_to_fit, estimator_id, user_info)
-% Wrapper around the Gpufit mex file.
+% Wrapper around the Gpufit with constraints mex file.
 %
 % Optional arguments can be given as empty matrix [].
 %

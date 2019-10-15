@@ -210,20 +210,20 @@ if( GPUFIT_USE_GAUSSIAN2D )
 endif()
 
 # USE_BASE_MODELS
-option( GPUFIT_USE_BASE_MODELS "Use the original Gpufit models: Linear 1D, Gaussian 1D, Gaussian 2D Rotated/Elliptic, Cauchy 2D Elliptic, Fletcher-Powell Helix, Brown-Dennis, plus an added exponential model." )
+option( GPUFIT_USE_BASE_MODELS "Use the original Gpufit models: Linear 1D, Gaussian 1D, Gaussian 2D Rotated/Elliptic, Cauchy 2D Elliptic, Fletcher-Powell Helix, Brown-Dennis, plus an added exponential model."  ON)
 if ( GPUFIT_USE_BASE_MODELS )
 	add_definitions( -DUSE_BASE_MODELS )
 endif()
 
 # Use added models (improve descriptions and defs)
-option( GPUFIT_USE_DIXON_2 "Use the Dixon 2 parameter model. (Extremely high resource usage)" )
-option( GPUFIT_USE_DIXON_3 "Use the Dixon 3 parameter model. (Extremely high resource usage)" )
-option( GPUFIT_USE_DIXON_4 "Use the Dixon 4 parameter model. (Extremely high resource usage)" )
-option( GPUFIT_USE_PATLAK_MODEL "Use the Patlak model to fit." )
-option( GPUFIT_USE_TOFTS_MODEL "Use the Tofts model to fit." )
-option( GPUFIT_USE_TOFTS_EXTENDED_MODEL "Use the extended Tofts model to fit." )
-option( GPUFIT_USE_TISSUE_UPTAKE_MODEL "Use the tissue uptake model to fit." )
-option( GPUFIT_USE_2CXM "Use the two-compartment exchange model to fit." )
+option( GPUFIT_USE_DIXON_2 "Use the Dixon 2 parameter model. (Extremely high resource usage)" ON)
+option( GPUFIT_USE_DIXON_3 "Use the Dixon 3 parameter model. (Extremely high resource usage)"  ON)
+option( GPUFIT_USE_DIXON_4 "Use the Dixon 4 parameter model. (Extremely high resource usage)"  ON)
+option( GPUFIT_USE_PATLAK_MODEL "Use the Patlak model to fit."  ON)
+option( GPUFIT_USE_TOFTS_MODEL "Use the Tofts model to fit."  ON)
+option( GPUFIT_USE_TOFTS_EXTENDED_MODEL "Use the extended Tofts model to fit."  ON)
+option( GPUFIT_USE_TISSUE_UPTAKE_MODEL "Use the tissue uptake model to fit."  ON)
+option( GPUFIT_USE_2CXM "Use the two-compartment exchange model to fit."  ON)
 
 if( GPUFIT_USE_DIXON_2 )
 	add_definitions( -DUSE_DIXON_2 )
@@ -273,7 +273,5 @@ endif()
 
 add_subdirectory( matlab )
 add_subdirectory( python )
-		
-# disable java binding
-#add_subdirectory( java )
+# add_subdirectory( java )
 

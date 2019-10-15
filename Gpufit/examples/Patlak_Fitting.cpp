@@ -117,6 +117,12 @@ void patlak_two()
 		data[i] = data[i] + norm_snr(rng);
 	}
 
+	// generate weights
+	std::vector< REAL > weights(n_points_per_fit * n_fits);
+	for (size_t i = 0; i != weights.size(); i++)
+	{
+		weights[i] = 1.0f;
+	}
 
 
 	// tolerance
@@ -146,7 +152,7 @@ void patlak_two()
 		n_fits,
 		n_points_per_fit,
 		data.data(),
-		0,
+		weights.data(),
 		model_id,
 		initial_parameters.data(),
 		tolerance,
