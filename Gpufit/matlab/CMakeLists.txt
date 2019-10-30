@@ -1,4 +1,3 @@
-
 # MATLAB Gpufit binding
 
 if( NOT Matlab_FOUND )

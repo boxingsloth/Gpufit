@@ -2,7 +2,16 @@ function [parameters, states, chi_squares, n_iterations, time]...
     = gpufit_constraints(data, constraints, model_id, initial_parameters, tolerance, max_n_iterations, parameters_to_fit, estimator_id, user_info)
 % Wrapper around the Gpufit with constraints mex file.
 %
-% Optional arguments can be given as empty matrix [].
+%   Input:
+%
+%
+%   Outputs:
+%       states:
+%           0:	The fit converged, tolerance is satisfied, the maximum number of iterations is not exceeded
+%           1:	Maximum number of iterations exceeded
+%           2:	During the Gauss-Jordan elimination the Hessian matrix is indicated as singular
+%           3:	Non-positive curve values have been detected while using MLE (MLE requires only positive curve values)
+%           4:	State not read from GPU Memory
 %
 % Default values as specified
 
@@ -35,7 +44,7 @@ n_fits = data_size(2);
 % consistency with constraints
 % first dimension has to be 2*n_parameters
 % second dimension has to be the number of fist
-assert(n_fits == size(weights,2)), 'Dimension mismatch between data and constraints')
+assert(n_fits == size(constraints,2), 'Dimension mismatch between data and constraints')
 
 % initial parameters is 2D and read number of parameters
 initial_parameters_size = size(initial_parameters);
@@ -76,9 +85,7 @@ end
 
 % data, weights (if given), initial_parameters are all single
 assert(isa(data, 'single'), 'Type of data is not single');
-if ~isempty(weights)
-    assert(isa(weights, 'single'), 'Type of weights is not single');
-end
+assert(isa(constraints, 'single'), 'Type of constraints is not single');
 assert(isa(initial_parameters, 'single'), 'Type of initial_parameters is not single');
 
 % parameters_to_fit is int32 (cast to int32 if incorrect type)

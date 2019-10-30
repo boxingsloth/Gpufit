@@ -21,6 +21,7 @@
 #include "tofts_extended.cuh"
 #include "tissue_uptake.cuh"
 #include "two-compartment_exchange.cuh"
+#include "dce_standard.cuh"
 
 __device__ void calculate_model(
     ModelID const model_id,
@@ -124,6 +125,11 @@ __device__ void calculate_model(
 		calculate_two_compartment_exchange(parameters, n_fits, n_points, value, derivative, point_index, fit_index, chunk_index, user_info, user_info_size);
 		break;
 #endif
+#ifdef GPUFIT_DCE_STANDARD_CUH_INCLUDED
+    case DCE_STANDARD:
+		calculate_dce_standard(parameters, n_fits, n_points, value, derivative, point_index, fit_index, chunk_index, user_info, user_info_size);
+		break;
+#endif
     default:
         break;
     }
@@ -151,6 +157,7 @@ void configure_model(ModelID const model_id, int & n_parameters, int & n_dimensi
     case TOFTS_EXTENDED:			n_parameters = 3; n_dimensions = 1; break;
     case TISSUE_UPTAKE:				n_parameters = 3; n_dimensions = 1; break;
     case TWO_COMPARTMENT_EXCHANGE:	n_parameters = 4; n_dimensions = 1; break;
+	case DCE_STANDARD:				n_parameters = 3; n_dimensions = 1; break;
     default:															break;
     }
 }

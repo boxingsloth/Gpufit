@@ -1,7 +1,7 @@
 #ifdef USE_TOFTS
 #define GPUFIT_TOFTS_CUH_INCLUDED
 
-__device__ REAL get_value (
+__device__ REAL get_value_tofts (
 	REAL p0, //Ktrans
 	REAL p1, //Ve
 	int const point_index,
@@ -43,7 +43,7 @@ __device__ void calculate_tofts (               // function name
 	REAL const * Cp = user_info_float + n_points;
 
 	// formula calculating fit model values
-	value[point_index] = get_value(parameters[0],parameters[1],point_index,T,Cp);
+	value[point_index] = get_value_tofts(parameters[0],parameters[1],point_index,T,Cp);
 
 
 	/////////////////////////// derivative ///////////////////////////
@@ -58,13 +58,13 @@ __device__ void calculate_tofts (               // function name
 		//3 point method
 
 		// parameters[0]' = (Ktrans)'
-		f_plus_h = get_value(parameters[0]+h,parameters[1],point_index,T,Cp);
-		f_minus_h = get_value(parameters[0]-h,parameters[1],point_index,T,Cp);
+		f_plus_h = get_value_tofts(parameters[0]+h,parameters[1],point_index,T,Cp);
+		f_minus_h = get_value_tofts(parameters[0]-h,parameters[1],point_index,T,Cp);
 		current_derivative[0 * n_points] = 1/(2*h)*(f_plus_h-f_minus_h);
 
 		// parameters[1]' = (Ve)'
-		f_plus_h = get_value(parameters[0],parameters[1]+h,point_index,T,Cp);
-		f_minus_h = get_value(parameters[0],parameters[1]-h,point_index,T,Cp);
+		f_plus_h = get_value_tofts(parameters[0],parameters[1]+h,point_index,T,Cp);
+		f_minus_h = get_value_tofts(parameters[0],parameters[1]-h,point_index,T,Cp);
 		current_derivative[1 * n_points] = 1/(2*h)*(f_plus_h-f_minus_h);
 	}
 	else

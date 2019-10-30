@@ -216,14 +216,15 @@ if ( GPUFIT_USE_BASE_MODELS )
 endif()
 
 # Use added models (improve descriptions and defs)
-option( GPUFIT_USE_DIXON_2 "Use the Dixon 2 parameter model. (Extremely high resource usage)" ON)
-option( GPUFIT_USE_DIXON_3 "Use the Dixon 3 parameter model. (Extremely high resource usage)"  ON)
-option( GPUFIT_USE_DIXON_4 "Use the Dixon 4 parameter model. (Extremely high resource usage)"  ON)
+option( GPUFIT_USE_DIXON_2 "Use the Dixon 2 parameter model. (Extremely high resource usage)" OFF)
+option( GPUFIT_USE_DIXON_3 "Use the Dixon 3 parameter model. (Extremely high resource usage)"  OFF)
+option( GPUFIT_USE_DIXON_4 "Use the Dixon 4 parameter model. (Extremely high resource usage)"  OFF)
 option( GPUFIT_USE_PATLAK_MODEL "Use the Patlak model to fit."  ON)
 option( GPUFIT_USE_TOFTS_MODEL "Use the Tofts model to fit."  ON)
 option( GPUFIT_USE_TOFTS_EXTENDED_MODEL "Use the extended Tofts model to fit."  ON)
 option( GPUFIT_USE_TISSUE_UPTAKE_MODEL "Use the tissue uptake model to fit."  ON)
 option( GPUFIT_USE_2CXM "Use the two-compartment exchange model to fit."  ON)
+option( GPUFIT_USE_DCE_STANDARD "Use the standard DCE model to fit."  ON)
 
 if( GPUFIT_USE_DIXON_2 )
 	add_definitions( -DUSE_DIXON_2 )
@@ -256,6 +257,11 @@ endif()
 if ( GPUFIT_USE_2CXM )
 	add_definitions( -DUSE_2CXM )
 endif()
+
+if ( GPUFIT_USE_DCE_STANDARD)
+	add_definitions( -DUSE_DCE_STANDARD)
+endif()
+
 
 #install( TARGETS Gpufit RUNTIME DESTINATION bin )
 
