@@ -13,3 +13,5 @@ Gpufit/java/gpufit/out
 # docs
 /docs/_build
 
+# build
+Gpufit-build/
