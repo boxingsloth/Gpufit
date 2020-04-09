@@ -11,7 +11,7 @@ __device__ REAL get_dce_standard_value (
 {
 	// integral/convolution
 	REAL convFunc = 0;
-	for (int i = 1; i < point_index; i++) {
+	for (int i = 1; i <= point_index; i++) {
 		// REAL spacing = T[i] - T[i - 1];
 		// REAL Ct = Cp[i] * exp(-p1 * (T[point_index]-T[i]));
 		// REAL Ctprev = Cp[i - 1] * exp(-p1 * (T[point_index]-T[i-1]));
